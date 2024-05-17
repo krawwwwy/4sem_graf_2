@@ -1,6 +1,7 @@
 import json
 import random
 from anytree import Node, RenderTree
+import time
 
 class TreeNode:
     id_counter = 1
@@ -11,6 +12,7 @@ class TreeNode:
         self.value = value
         self.children = []
 
+
     def add_child(self, child_node):
         self.children.append(child_node)
 
@@ -18,6 +20,7 @@ class TreeNode:
 def generate_n_tree(node_count, max_children):
     if node_count <= 0:
         return None
+
 
     root = TreeNode(random.randint(0, 1))
     remaining_nodes = node_count - 1
@@ -108,7 +111,7 @@ node_count = int(input("Введите количество узлов дере�
 max_children = int(input("Введите максимальное количество потомков узла: "))
 min_height = int(input("Введите минимальную высоту: "))
 max_height = int(input("Введите максимальную высоту: "))
-
+start = time.time()
 root = generate_n_tree(node_count, max_children)
 save_tree_to_json(root, 'n_tree.json')
 
@@ -118,15 +121,17 @@ root_anytree = tree_to_anytree(root)
 
 subtrees = find_subtrees_with_leaves_in_height_range(root, min_height, max_height)
 
-print("Original Tree Structure:")
-for pre, _, node in RenderTree(root_anytree):
-    print("%s%s" % (pre, node.name))
+#print("Original Tree Structure:")
+#for pre, _, node in RenderTree(root_anytree):
+    #print("%s%s" % (pre, node.name))
 
 print()
 
 for i, subtree in enumerate(subtrees):
     print(f"Subtree {i + 1}:")
     subtree_anytree = tree_to_anytree(subtree)
-    for pre, _, node in RenderTree(subtree_anytree):
-        print("%s%s" % (pre, node.name))
+    #for pre, _, node in RenderTree(subtree_anytree):
+        #print("%s%s" % (pre, node.name))
     print()
+end = time.time()
+print("time :", end-start)
