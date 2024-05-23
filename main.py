@@ -112,8 +112,8 @@ max_children = int(input("Введите максимальное количес
 min_height = int(input("Введите минимальную высоту: "))
 max_height = int(input("Введите максимальную высоту: "))
 start = time.time()
-root = generate_n_tree(node_count, max_children)
-save_tree_to_json(root, 'n_tree.json')
+#root = generate_n_tree(node_count, max_children)
+#save_tree_to_json(root, 'n_tree.json')
 
 root = load_tree_from_json('n_tree.json')
 
@@ -121,17 +121,17 @@ root_anytree = tree_to_anytree(root)
 
 subtrees = find_subtrees_with_leaves_in_height_range(root, min_height, max_height)
 
-#print("Original Tree Structure:")
-#for pre, _, node in RenderTree(root_anytree):
-    #print("%s%s" % (pre, node.name))
+print("Original Tree Structure:")
+for pre, _, node in RenderTree(root_anytree):
+    print("%s%s" % (pre, node.name))
 
 print()
 
 for i, subtree in enumerate(subtrees):
     print(f"Subtree {i + 1}:")
     subtree_anytree = tree_to_anytree(subtree)
-    #for pre, _, node in RenderTree(subtree_anytree):
-        #print("%s%s" % (pre, node.name))
+    for pre, _, node in RenderTree(subtree_anytree):
+        print("%s%s" % (pre, node.name))
     print()
 end = time.time()
 print("time :", end-start)
